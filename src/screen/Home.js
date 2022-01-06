@@ -122,7 +122,7 @@ function Home({navigation}) {
                   textShadowOffset: {width: 1, height: 2.5},
                   textShadowRadius: 0.1,
                 }}>
-                {currentData ? currentData?.PrecipitationType : 'Loading ...'}
+                {currentData ? currentData?.WeatherText : 'Loading ...'}
               </Text>
             </View>
             <View style={{marginTop: 15}}>
