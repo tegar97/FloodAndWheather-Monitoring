@@ -77,7 +77,12 @@ function SplashScreen({navigation}) {
       </View>
     );
   };
-  return <BaseView>{!nextScreen ? screenOne() : screenTwo()}</BaseView>;
+  return (
+    <BaseView
+      containerStyle={{paddingTop: 32, paddingLeft: 23, paddingRight: 23}}>
+      {!nextScreen ? screenOne() : screenTwo()}
+    </BaseView>
+  );
 }
 
 const styles = StyleSheet.create({

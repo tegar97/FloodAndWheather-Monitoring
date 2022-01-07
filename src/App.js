@@ -21,7 +21,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import SplashScreen from './screen/splashScreen';
 import Home from './screen/Home';
 import Forecast from './screen/Forecast';
-
+import FloodLevel from './screen/FloodLevel';
 const Stack = createNativeStackNavigator();
 
 const App = () => {
@@ -34,6 +34,7 @@ const App = () => {
         <Stack.Screen name="SplashScreen" component={SplashScreen} />
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="forecast" component={Forecast} />
+        <Stack.Screen name="FloodLevel" component={FloodLevel} />
       </Stack.Navigator>
     </NavigationContainer>
   );

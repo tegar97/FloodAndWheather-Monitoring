@@ -82,14 +82,14 @@ function Forecast({navigation}) {
         }}>
         <Text
           style={{
-            fontFamily: 'Overpass-Black',
+            fontFamily: 'Overpass-SemiBold',
             fontSize: 20,
             color: '#fff',
-            textShadowColor: 'rgba(0, 0, 0, 0.5)',
+            textShadowColor: 'rgba(0, 0, 0, 0.3)',
             textShadowOffset: {width: -1, height: 1},
             textShadowRadius: 0.1,
           }}>
-          Today
+          Hari ini
         </Text>
         <Text
           style={{
@@ -107,6 +107,28 @@ function Forecast({navigation}) {
           .map((data, idx) => (
             <ForeCastPerHour data={data} key={idx} />
           ))}
+      </View>
+
+      <View style={{marginTop: 20}}>
+        <View>
+          <TouchableOpacity onPress={() => navigation.navigate('FloodLevel')}>
+            <Text
+              style={{
+                fontFamily: 'Overpass-SemiBold',
+                fontSize: 20,
+                color: '#fff',
+                textShadowColor: 'rgba(0, 0, 0, 0.2)',
+                textShadowOffset: {width: -1, height: 1},
+                textShadowRadius: 0.1,
+              }}>
+              Monitoring Ketinggian Banjir
+            </Text>
+          </TouchableOpacity>
+        </View>
+        <View
+          style={{backgroundColor: 'rgba(255, 255, 255, 0.3)', width: '50%'}}>
+          <Text style={{color: '#ffff'}}>Daerah</Text>
+        </View>
       </View>
     </BaseView>
   );

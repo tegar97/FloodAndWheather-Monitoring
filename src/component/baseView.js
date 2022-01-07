@@ -3,18 +3,21 @@ import {StyleSheet, View} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import {LineTop} from '../Constant/Icons';
 import {LineBottom} from '../Constant/Icons';
-function BaseView({containerStyle, children}) {
+function BaseView({
+  containerStyle,
+  color1 = 'rgba(71, 191, 223, 1)',
+  children,
+}) {
   return (
     <View style={styles.BaseViewContainer}>
       <LinearGradient
-        colors={['rgba(71, 191, 223, 1)', 'rgba(74, 145, 255, 1)']}
+        colors={[color1, 'rgba(74, 145, 255, 1)']}
         start={{x: 1.3, y: 0.1}}
         end={{x: 1, y: 1}}
         style={{
           flex: 1,
           position: 'relative',
-          paddingLeft: 18,
-          paddingRight: 18,
+
           ...containerStyle,
         }}>
         <LineTop

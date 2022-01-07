@@ -1,7 +1,13 @@
 import React from 'react';
 import {Image, Text, View} from 'react-native';
-
+import GenateWheatherIcon from '../util/wheatherIcon';
 function ForeCastPerHour({data}) {
+  const [iconPhrase, setIconPharse] = React.useState(1);
+  React.useEffect(() => {
+    const iconNumber = GenateWheatherIcon(data.IconPhrase);
+    console.log(iconNumber);
+    setIconPharse(iconNumber);
+  }, [data.IconPhrase]);
   console.log(data);
   const convertDate = date => {
     console.log(date);
@@ -34,7 +40,7 @@ function ForeCastPerHour({data}) {
       </Text>
       <View style={{width: 64, height: 43, marginTop: 15, marginBottom: 15}}>
         <Image
-          source={require('./../assets/image/cloudSunSmall.png')}
+          source={require(`${iconPhrase}`)}
           style={{width: '100%', height: '100%'}}
         />
       </View>
