@@ -2,11 +2,11 @@ const GenateWheatherIcon = condition => {
   console.log('kondisi', condition);
   switch (condition) {
     case 'Sunny':
-      return './../assets/image/iconPhrase/1.png';
+      return 'https://developer.accuweather.com/sites/default/files/04-s.png';
     case 'Cloudy':
-      return './../assets/image/iconPhrase/2.png';
+      return 'https://developer.accuweather.com/sites/default/files/04-s.png';
     default:
-      return './../assets/image/iconPhrase/2.png';
+      return 'https://developer.accuweather.com/sites/default/files/04-s.png';
   }
 };
 

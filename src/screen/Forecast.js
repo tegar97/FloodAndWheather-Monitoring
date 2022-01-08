@@ -1,12 +1,32 @@
 import axios from 'axios';
 import React from 'react';
-import {Text, TouchableOpacity, View} from 'react-native';
+import {ScrollView, Text, TouchableOpacity, View} from 'react-native';
 import BaseView from '../component/baseView';
 import ForeCastPerHour from '../component/ForeCastPerHour';
 import {Right, Setting} from '../Constant/Icons';
 import Moment from 'react-moment';
+import moment from 'moment';
+import ForecastPerDay from '../component/ForecastPerDay';
 function Forecast({navigation}) {
   const [forecastHour, setforecastHour] = React.useState([]);
+  const [forecastDays, setforecastDays] = React.useState([]);
+  const [ErrorMessage, setErrorMessage] = React.useState(null);
+
+  React.useState(() => {
+    const getForecastPerDays = async () => {
+      axios
+        .get(
+          'http://dataservice.accuweather.com/forecasts/v1/daily/5day/202621?apikey=l4mG8tiYRokPL22IcqO3kxXY6CHoX62t&details=true&metric=true',
+        )
+        .then(res => {
+          setforecastDays(res.data.DailyForecasts);
+        })
+        .catch(err => {
+          setErrorMessage(err);
+        });
+    };
+    getForecastPerDays();
+  }, []);
   React.useState(() => {
     const getForecastPerHour = async () => {
       axios
@@ -34,7 +54,6 @@ function Forecast({navigation}) {
         });
     };
     getForecastPerHour();
-    console.log(forecastHour);
   }, []);
   return (
     <BaseView
@@ -97,7 +116,7 @@ function Forecast({navigation}) {
             fontSize: 18,
             color: '#fff',
           }}>
-          Jan,06{' '}
+          {moment(new Date()).format('MMM  do')}
         </Text>
       </View>
 
@@ -128,6 +147,51 @@ function Forecast({navigation}) {
         <View
           style={{backgroundColor: 'rgba(255, 255, 255, 0.3)', width: '50%'}}>
           <Text style={{color: '#ffff'}}>Daerah</Text>
+        </View>
+      </View>
+
+      <View style={{flex: 1, flexDirection: 'column'}}>
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            width: '100%',
+            marginTop: 40,
+          }}>
+          <Text
+            style={{
+              fontFamily: 'Overpass-SemiBold',
+              fontSize: 20,
+              color: '#fff',
+              textShadowColor: 'rgba(0, 0, 0, 0.3)',
+              textShadowOffset: {width: -1, height: 1},
+              textShadowRadius: 0.1,
+            }}>
+            Next Forecast
+          </Text>
+          <Text
+            style={{
+              fontFamily: 'Overpass-Regular',
+              fontSize: 18,
+              color: '#fff',
+            }}></Text>
+        </View>
+        <View style={{height: 150}}>
+          <ScrollView>
+            <View style={{width: '100%', marginTop: 20}}>
+              {forecastDays
+                ? forecastDays.map(data => (
+                    <ForecastPerDay
+                      key={data.date}
+                      temp={data.Temperature}
+                      icon={data.Day}
+                      date={data.Date}
+                    />
+                  ))
+                : 'Loading .....'}
+            </View>
+          </ScrollView>
         </View>
       </View>
     </BaseView>

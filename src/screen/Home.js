@@ -7,8 +7,11 @@ import {MapsIcon, Notif} from '../Constant/Icons';
 import GetLocation from 'react-native-get-location';
 import axios from 'axios';
 import NavBottom from '../component/NavBottom';
+import moment from 'moment';
 function Home({navigation}) {
   const [currentData, setCurrentData] = React.useState([]);
+  const [currentDate, setCurrentDate] = React.useState();
+  const [notifModal, setNotifModal] = React.useState();
   //   GetLocation.getCurrentPosition({
   //     enableHighAccuracy: true,
   //     timeout: 15000,
@@ -20,7 +23,16 @@ function Home({navigation}) {
   //       const {code, message} = error;
   //       console.warn(code, message);
   //     });
-
+  React.useEffect(() => {
+    let today = new Date();
+    var date =
+      today.getFullYear() +
+      '-' +
+      (today.getMonth() + 1) +
+      '-' +
+      today.getDate();
+    setCurrentDate(date);
+  }, []);
   React.useEffect(() => {
     const getCurrentWeather = async () => {
       console.log();
@@ -39,114 +51,116 @@ function Home({navigation}) {
     getCurrentWeather();
   }, []);
   return (
-    <BaseView
-      containerStyle={{paddingTop: 32, paddingLeft: 23, paddingRight: 23}}>
-      <NavBottom navigation={navigation} />
-      <View
-        style={{
-          flexDirection: 'row',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-        }}>
-        <View style={{flexDirection: 'row', alignItems: 'center'}}>
-          <MapsIcon style={{width: 30, height: 30}} />
-          <Text
-            style={{
-              marginLeft: 15,
-              fontFamily: 'Overpass-Bold',
-              fontSize: 18,
-              color: '#fff',
-              textShadowColor: 'rgba(0, 0, 0, 0.5)',
-              textShadowOffset: {width: -1, height: 1},
-              textShadowRadius: 0.1,
-            }}>
-            Bandung
-          </Text>
-        </View>
-        <Notif style={{width: 30, height: 30}} />
-      </View>
-      <View style={{marginTop: 20, alignItems: 'center'}}>
-        <Image
-          source={require('./../assets/image/wheatherSun.png')}
-          style={{width: 170, height: 170}}
-        />
+    <View style={{flex: 1}}>
+      <BaseView
+        containerStyle={{paddingTop: 32, paddingLeft: 23, paddingRight: 23}}>
+        <NavBottom navigation={navigation} />
         <View
           style={{
-            width: '100%',
-            backgroundColor: 'rgba(255, 255, 255, 0.3);',
+            flexDirection: 'row',
             alignItems: 'center',
-            borderRadius: 13,
-            paddingBottom: 25,
-            paddingTop: 25,
+            justifyContent: 'space-between',
           }}>
+          <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            <MapsIcon style={{width: 30, height: 30}} />
+            <Text
+              style={{
+                marginLeft: 15,
+                fontFamily: 'Overpass-Bold',
+                fontSize: 18,
+                color: '#fff',
+                textShadowColor: 'rgba(0, 0, 0, 0.5)',
+                textShadowOffset: {width: -1, height: 1},
+                textShadowRadius: 0.1,
+              }}>
+              Bandung
+            </Text>
+          </View>
+          <Notif style={{width: 30, height: 30}} />
+        </View>
+        <View style={{marginTop: 20, alignItems: 'center'}}>
+          <Image
+            source={require('./../assets/image/wheatherSun.png')}
+            style={{width: 170, height: 170}}
+          />
           <View
             style={{
+              width: '100%',
+              backgroundColor: 'rgba(255, 255, 255, 0.3);',
               alignItems: 'center',
-              justifyContent: 'center',
-              flexDirection: 'column',
+              borderRadius: 13,
+              paddingBottom: 25,
+              paddingTop: 25,
             }}>
-            <View style={{alignItems: 'center'}}>
-              <Text
-                style={{
-                  color: '#ffff',
-                  fontFamily: 'Overpass-Regular',
-                  fontSize: 19,
-                  textShadowColor: 'rgba(0, 0, 0, 0.25)',
-                  textShadowOffset: {width: 1, height: 2.5},
-                  textShadowRadius: 0.1,
-                }}>
-                07 Januari 2020
-              </Text>
-              <Text
-                style={{
-                  textAlign: 'center',
-                  alignSelf: 'center',
-                  color: '#ffff',
-                  fontFamily: 'Overpass-Regular',
-                  fontSize: 62,
-                  // textShadowColor: 'rgba(0, 0, 0, 0.3)',
-                  // textShadowOffset: {width: -2.8, height: 5},
-                  // textShadowRadius: 38,
-                }}>
-                {currentData
-                  ? currentData?.ApparentTemperature?.Metric?.Value
-                  : 'Loading'}{' '}
-                °
-              </Text>
-              <Text
-                style={{
-                  color: '#ffff',
-                  fontFamily: 'Overpass-Regular',
-                  fontSize: 19,
-                  textShadowColor: 'rgba(0, 0, 0, 0.25)',
-                  textShadowOffset: {width: 1, height: 2.5},
-                  textShadowRadius: 0.1,
-                }}>
-                {currentData ? currentData?.WeatherText : 'Loading ...'}
-              </Text>
-            </View>
-            <View style={{marginTop: 15}}>
-              {currentData ? (
-                <>
-                  <OtherInfo
-                    name="Hum"
-                    type="Hum"
-                    value={currentData?.RelativeHumidity}
-                  />
-                  <OtherInfo
-                    name="Wind"
-                    type="Wind"
-                    value={currentData?.Wind?.Speed?.Metric?.Value}
-                  />
-                </>
-              ) : (
-                'Loading ....'
-              )}
+            <View
+              style={{
+                alignItems: 'center',
+                justifyContent: 'center',
+                flexDirection: 'column',
+              }}>
+              <View style={{alignItems: 'center'}}>
+                <Text
+                  style={{
+                    color: '#ffff',
+                    fontFamily: 'Overpass-Regular',
+                    fontSize: 19,
+                    textShadowColor: 'rgba(0, 0, 0, 0.25)',
+                    textShadowOffset: {width: 1, height: 2.5},
+                    textShadowRadius: 0.1,
+                  }}>
+                  {moment(new Date()).format('MMM Do YY')}
+                </Text>
+                <Text
+                  style={{
+                    textAlign: 'center',
+                    alignSelf: 'center',
+                    color: '#ffff',
+                    fontFamily: 'Overpass-Regular',
+                    fontSize: 62,
+                    // textShadowColor: 'rgba(0, 0, 0, 0.3)',
+                    // textShadowOffset: {width: -2.8, height: 5},
+                    // textShadowRadius: 38,
+                  }}>
+                  {currentData
+                    ? currentData?.ApparentTemperature?.Metric?.Value
+                    : 'Loading'}{' '}
+                  °
+                </Text>
+                <Text
+                  style={{
+                    color: '#ffff',
+                    fontFamily: 'Overpass-Regular',
+                    fontSize: 19,
+                    textShadowColor: 'rgba(0, 0, 0, 0.25)',
+                    textShadowOffset: {width: 1, height: 2.5},
+                    textShadowRadius: 0.1,
+                  }}>
+                  {currentData ? currentData?.WeatherText : 'Loading ...'}
+                </Text>
+              </View>
+              <View style={{marginTop: 15}}>
+                {currentData ? (
+                  <>
+                    <OtherInfo
+                      name="Hum"
+                      type="Hum"
+                      value={currentData?.RelativeHumidity}
+                    />
+                    <OtherInfo
+                      name="Wind"
+                      type="Wind"
+                      value={currentData?.Wind?.Speed?.Metric?.Value}
+                    />
+                  </>
+                ) : (
+                  'Loading ....'
+                )}
+              </View>
             </View>
           </View>
         </View>
-      </View>
-    </BaseView>
+      </BaseView>
+    </View>
   );
 }
 

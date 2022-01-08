@@ -8,6 +8,7 @@ import Left from './../assets/icons/left.svg';
 import Right from './../assets/icons/right.svg';
 import Setting from './../assets/icons/setting.svg';
 import CloudSunny from './../assets/icons/sunny.svg';
+import Union from './../assets/image/iconPhrase/Union.svg';
 export {
   LineTop,
   LineBottom,
@@ -19,4 +20,5 @@ export {
   Right,
   CloudSunny,
   Setting,
+  Union,
 };
