@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1066623164325",
+    "project_id": "wheatherapp-4aea9",
+    "storage_bucket": "wheatherapp-4aea9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1066623164325:android:6380ed3864179e4516924c",
+        "android_client_info": {
+          "package_name": "com.floodmonitoring"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1066623164325-loirpdf0as4sc5tb6qtj0h39ggvtgugd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDfnhFVOvpG2HKUx5_mI_fiKYej9Ih0SME"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1066623164325-loirpdf0as4sc5tb6qtj0h39ggvtgugd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

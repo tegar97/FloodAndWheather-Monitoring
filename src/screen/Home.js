@@ -1,5 +1,12 @@
 import React from 'react';
-import {Image, StyleSheet, Text, View} from 'react-native';
+import {
+  Image,
+  StyleSheet,
+  Text,
+  Touchable,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import BaseView from '../component/baseView';
 import OtherInfo from '../component/otherInfo';
@@ -8,10 +15,11 @@ import GetLocation from 'react-native-get-location';
 import axios from 'axios';
 import NavBottom from '../component/NavBottom';
 import moment from 'moment';
+import Notification from '../component/Notification.';
 function Home({navigation}) {
   const [currentData, setCurrentData] = React.useState([]);
   const [currentDate, setCurrentDate] = React.useState();
-  const [notifModal, setNotifModal] = React.useState();
+  const [notifModal, setNotifModal] = React.useState(false);
   //   GetLocation.getCurrentPosition({
   //     enableHighAccuracy: true,
   //     timeout: 15000,
@@ -33,6 +41,10 @@ function Home({navigation}) {
       today.getDate();
     setCurrentDate(date);
   }, []);
+
+  const showNotification = () => {
+    setNotifModal(!notifModal);
+  };
   React.useEffect(() => {
     const getCurrentWeather = async () => {
       console.log();
@@ -51,9 +63,15 @@ function Home({navigation}) {
     getCurrentWeather();
   }, []);
   return (
-    <View style={{flex: 1}}>
+    <View style={{flex: 1, position: 'relative'}}>
+      {notifModal && <Notification />}
       <BaseView
-        containerStyle={{paddingTop: 32, paddingLeft: 23, paddingRight: 23}}>
+        containerStyle={{
+          paddingTop: 32,
+          paddingLeft: 23,
+          paddingRight: 23,
+          backgroundColor: 'rgba(0,0,0,.2)',
+        }}>
         <NavBottom navigation={navigation} />
         <View
           style={{
@@ -76,7 +94,9 @@ function Home({navigation}) {
               Bandung
             </Text>
           </View>
-          <Notif style={{width: 30, height: 30}} />
+          <TouchableOpacity onPress={() => showNotification()}>
+            <Notif style={{width: 30, height: 30}} />
+          </TouchableOpacity>
         </View>
         <View style={{marginTop: 20, alignItems: 'center'}}>
           <Image

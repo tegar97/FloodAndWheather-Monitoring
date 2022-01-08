@@ -3,7 +3,7 @@ import React from 'react';
 import {Image, Text, TouchableOpacity, View} from 'react-native';
 import BaseView from '../component/baseView';
 import {Right, Setting} from '../Constant/Icons';
-
+import PushNotification from 'react-native-push-notification';
 function FloodLevel({navigation}) {
   const [distanceLevel, setDistanceLevel] = React.useState(0);
   const [heightObjectTesting, setHeightObjectTesting] = React.useState(0);

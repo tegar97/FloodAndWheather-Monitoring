@@ -9,6 +9,7 @@ import Right from './../assets/icons/right.svg';
 import Setting from './../assets/icons/setting.svg';
 import CloudSunny from './../assets/icons/sunny.svg';
 import Union from './../assets/image/iconPhrase/Union.svg';
+import Close from './../assets/icons/close.svg';
 export {
   LineTop,
   LineBottom,
@@ -21,4 +22,5 @@ export {
   CloudSunny,
   Setting,
   Union,
+  Close,
 };
